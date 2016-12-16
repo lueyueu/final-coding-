@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40" fx:controller="rocket.app.view.MortgageController">
-
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rocket.app.view.MortgageController">
+   <children>
+      <Button fx:id="btnPayment" layoutX="138.0" layoutY="400.0" mnemonicParsing="false" onAction="#btnCalculatePayment" prefHeight="1.0" prefWidth="398.0" text="Calculate Payment" />
+      <Label fx:id="lblIncome" layoutX="18.0" layoutY="79.0" text="Monthly Income" />
+      <Label fx:id="lblExpenses" layoutX="11.0" layoutY="139.0" text="Monthly Expenses" />
+      <Label fx:id="lblHouseCost" layoutX="23.0" layoutY="259.0" text="House Cost" />
+      <Label fx:id="lblCreditScore" layoutX="28.0" layoutY="209.0" text="Credit Score" />
+      <Label layoutX="430.0" layoutY="122.0" />
+      <Label fx:id="lblTerm" layoutX="43.0" layoutY="351.0" text="Term" />
+      <TextField fx:id="txtIncome" layoutX="139.0" layoutY="74.0" prefHeight="25.0" prefWidth="71.0" />
+      <TextField fx:id="txtExpenses" layoutX="139.0" layoutY="134.0" prefHeight="25.0" prefWidth="71.0" />
+      <TextField fx:id="txtHouseCost" layoutX="138.0" layoutY="254.0" />
+      <TextField fx:id="txtCreditScore" layoutX="138.0" layoutY="204.0" />
+      <ComboBox fx:id="loanTerm" layoutX="146.0" layoutY="346.0" prefWidth="150.0" />
+      <Label fx:id="lblError" layoutX="189.0" layoutY="20.0" text="Please Enter the Required Information Below" />
+      <TextField fx:id="txtDownPayment" layoutX="138.0" layoutY="298.0" />
+      <Label fx:id="lblDownPayment" layoutX="13.0" layoutY="303.0" text="Down Payment" />
+      <Group />
+      <Canvas height="200.0" layoutX="392.0" layoutY="79.0" width="200.0" />
+   </children>
 </AnchorPane>

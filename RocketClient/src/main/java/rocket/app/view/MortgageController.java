@@ -1,26 +1,73 @@
 package rocket.app.view;
 
+import java.net.URL;
+import java.text.DecimalFormat;
+import java.util.ResourceBundle;
+
 import eNums.eAction;
+import exceptions.RateException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import rocket.app.MainApp;
 import rocketCode.Action;
 import rocketData.LoanRequest;
 
-public class MortgageController {
+public class MortgageController implements Initializable{
 
 	private MainApp mainApp;
 	
 	//	TODO - RocketClient.RocketMainController
-	
+	public MortgageController(){
+	}
 	//	Create private instance variables for:
-	//		TextBox  - 	txtIncome
-	//		TextBox  - 	txtExpenses
-	//		TextBox  - 	txtCreditScore
-	//		TextBox  - 	txtHouseCost
-	//		ComboBox -	loan term... 15 year or 30 year
-	//		Labels   -  various labels for the controls
-	//		Button   -  button to calculate the loan payment
+	
+//	TextBox  - 	txtIncome
+//	TextBox  - 	txtExpenses
+//	TextBox  - 	txtCreditScore
+//	TextBox  - 	txtHouseCost
+	@FXML
+	private Button btnPayment;
+	@FXML
+	private TextField txtIncome;
+	@FXML
+	private TextField txtExpenses;
+	@FXML
+	private TextField txtCreditScore;
+	@FXML
+	private TextField txtHouseCost;
+	@FXML
+	private TextField txtDownPayment;
+	@FXML
+	private ComboBox loanTerm;
+	
+
+//		ComboBox -	loan term... 15 year or 30 year
+//		Labels   -  various labels for the controls
+//		Button   -  button to calculate the loan payment
+	@FXML
+	private Label LIncome;
+	@FXML
+	private Label Iexpenses;
+	@FXML
+	private Label ICreditScore;
+	@FXML
+	private Label IHouseCost;
+	@FXML
+	private Label ITerm;
+	@FXML
+	private Label IDownPayment;
+	
+	@FXML
+	public Label lblError;
+	
+	
 	//		Label    -  to show error messages (exception throw, payment exception)
 
 	public void setMainApp(MainApp mainApp) {
@@ -41,20 +88,62 @@ public class MortgageController {
 		//	TODO - RocketClient.RocketMainController
 		//			set the loan request details...  rate, term, amount, credit score, downpayment
 		//			I've created you an instance of lq...  execute the setters in lq
-
-		a.setLoanRequest(lq);
+		lq.setdIncome(Double.parseDouble(txtIncome.getText()));
+		lq.setdExpenses(Double.parseDouble(txtExpenses.getText()));
+		lq.setdAmount(Double.parseDouble(txtHouseCost.getText())-Double.parseDouble(txtDownPayment.getText()));
+		if(loanTerm.getSelectionModel().getSelectedItem().toString() == "15 Year")
+			lq.setiTerm(180);
+		else
+			lq.setiTerm(360);
+		lq.setiCreditScore(Integer.parseInt(txtCreditScore.getText()));
 		
-		//	send lq as a message to RocketHub		
+		
+			
 		mainApp.messageSend(lq);
 	}
 	
 	public void HandleLoanRequestDetails(LoanRequest lRequest)
 	{
-		//	TODO - RocketClient.HandleLoanRequestDetails
-		//			lRequest is an instance of LoanRequest.
-		//			after it's returned back from the server, the payment (dPayment)
-		//			should be calculated.
-		//			Display dPayment on the form, rounded to two decimal places
+		double PaymentPossible = lRequest.getdIncome()*.28;
+		double OtherPaymentPossible = (lRequest.getdIncome() - lRequest.getdExpenses())*.36;
+		double FinalPaymentPossible;
+		if(PaymentPossible < OtherPaymentPossible){
+			FinalPaymentPossible = PaymentPossible;
+		}
+		else {
+			FinalPaymentPossible = OtherPaymentPossible;
+		}
+	
+
+		double payment = lRequest.getdPayment();
+		String output;
 		
+		if(FinalPaymentPossible > payment){
+			output = new DecimalFormat("#.##").format(payment);
+			String APR = String.valueOf(lRequest.getdRate());
+			lblError.setText("Mortgage payment will be: $" + output + " and your APR is " + APR + "%");
+		}
+		
+		
+		else{
+			output = "It is Too High for the house cost.";
+			lblError.setText(output);
+		}
+
 	}
+
+	ObservableList<String> list = FXCollections.observableArrayList("15 Year","30 Year");
+	
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		loanTerm.setItems(list);	
+	}
+	
+	
+	public void HandleRateException(RateException e){
+		lblError.setText("Too low for credit score on record");
+	}
+	
+	
 }
