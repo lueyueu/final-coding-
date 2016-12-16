@@ -83,11 +83,9 @@ public class MortgageController implements Initializable{
 		Object message = null;
 		//	TODO - RocketClient.RocketMainController
 		
-		Action a = new Action(eAction.CalculatePayment);
+		Action f = new Action(eAction.CalculatePayment);
 		LoanRequest lq = new LoanRequest();
-		//	TODO - RocketClient.RocketMainController
-		//			set the loan request details...  rate, term, amount, credit score, downpayment
-		//			I've created you an instance of lq...  execute the setters in lq
+		
 		lq.setdIncome(Double.parseDouble(txtIncome.getText()));
 		lq.setdExpenses(Double.parseDouble(txtExpenses.getText()));
 		lq.setdAmount(Double.parseDouble(txtHouseCost.getText())-Double.parseDouble(txtDownPayment.getText()));
