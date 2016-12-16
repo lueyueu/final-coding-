@@ -98,8 +98,12 @@ public class MortgageController implements Initializable{
 		lq.setdIncome(Double.parseDouble(txtIncome.getText()));
 		lq.setdExpenses(Double.parseDouble(txtExpenses.getText()));
 		lq.setdAmount(Double.parseDouble(txtHouseCost.getText())-Double.parseDouble(txtDownPayment.getText()));
+		
+		
 		if(loanTerm.getSelectionModel().getSelectedItem().toString() == "15 Year")
 			lq.setiTerm(180);
+		
+		
 		else
 			lq.setiTerm(360);
 		lq.setiCreditScore(Integer.parseInt(txtCreditScore.getText()));
