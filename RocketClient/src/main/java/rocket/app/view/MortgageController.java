@@ -95,6 +95,7 @@ public class MortgageController implements Initializable{
 		Action f = new Action(eAction.CalculatePayment);
 		LoanRequest lq = new LoanRequest();
 		
+		
 		lq.setdIncome(Double.parseDouble(txtIncome.getText()));
 		lq.setdExpenses(Double.parseDouble(txtExpenses.getText()));
 		lq.setdAmount(Double.parseDouble(txtHouseCost.getText())-Double.parseDouble(txtDownPayment.getText()));
