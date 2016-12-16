@@ -105,6 +105,9 @@ public class MortgageController implements Initializable{
 		lq.setiCreditScore(Integer.parseInt(txtCreditScore.getText()));
 		
 		
+		
+		
+		
 			
 		mainApp.messageSend(lq);
 	}
