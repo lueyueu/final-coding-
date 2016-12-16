@@ -28,6 +28,9 @@ public class MortgageController implements Initializable{
 	}
 	//	Create private instance variables for:
 	
+	
+	
+	
 //	TextBox  - 	txtIncome
 //	TextBox  - 	txtExpenses
 //	TextBox  - 	txtCreditScore
