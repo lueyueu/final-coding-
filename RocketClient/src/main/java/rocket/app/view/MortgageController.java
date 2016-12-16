@@ -117,9 +117,10 @@ public class MortgageController implements Initializable{
 		mainApp.messageSend(lq);
 	}
 	
-	
+	 
 	public void HandleLoanRequestDetails(LoanRequest lRequest)
 	{
+		
 		double PaymentPossible = lRequest.getdIncome()*.28;
 		double OtherPaymentPossible = (lRequest.getdIncome() - lRequest.getdExpenses())*.36;
 		double FinalPaymentPossible;
