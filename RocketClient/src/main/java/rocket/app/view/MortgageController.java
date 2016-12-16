@@ -47,6 +47,9 @@ public class MortgageController implements Initializable{
 	@FXML
 	private ComboBox loanTerm;
 	
+	
+	
+	
 
 //		ComboBox -	loan term... 15 year or 30 year
 //		Labels   -  various labels for the controls
@@ -68,8 +71,7 @@ public class MortgageController implements Initializable{
 	public Label lblError;
 	
 	
-	//		Label    -  to show error messages (exception throw, payment exception)
-
+	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
@@ -77,11 +79,15 @@ public class MortgageController implements Initializable{
 	
 	//	TODO - RocketClient.RocketMainController
 	//			Call this when btnPayment is pressed, calculate the payment
+	
+	
 	@FXML
 	public void btnCalculatePayment(ActionEvent event)
 	{
 		Object message = null;
-		//	TODO - RocketClient.RocketMainController
+		
+		
+		
 		
 		Action f = new Action(eAction.CalculatePayment);
 		LoanRequest lq = new LoanRequest();
@@ -99,6 +105,7 @@ public class MortgageController implements Initializable{
 			
 		mainApp.messageSend(lq);
 	}
+	
 	
 	public void HandleLoanRequestDetails(LoanRequest lRequest)
 	{
@@ -137,6 +144,8 @@ public class MortgageController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		loanTerm.setItems(list);	
 	}
+	
+	
 	
 	
 	public void HandleRateException(RateException e){
